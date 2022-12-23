@@ -1,0 +1,116 @@
+<div class="flex justify-center items-start my-6 min-h-screen">
+  <form
+    #myForm="ngForm"
+    (ngSubmit)="submit()"
+    class="p-5 border w-10/12 rounded-md"
+  >
+    <h1 class="text-center text-2xl mb-3">Edit Post</h1>
+    <div class="mb-3">
+      <label for="title" class="block">Title</label>
+      <input
+        class="p-2 rounded-sm border w-full"
+        type="text"
+        name="title"
+        id="title"
+        [(ngModel)]="form.title"
+        #title="ngModel"
+        required
+      />
+    </div>
+    <div
+      *ngIf="title.invalid && (title.dirty || title.touched)"
+      class="text-red-800 p-2 bg-red-300 rounded mb-2"
+    >
+      Title is required field
+    </div>
+
+    <div class="mb-3">
+      <label for="description" class="block">Description</label>
+      <textarea
+        class="p-2 rounded-sm border w-full"
+        type="text"
+        name="description"
+        id="description"
+        [(ngModel)]="form.description"
+        #description="ngModel"
+        required
+      >
+      </textarea>
+    </div>
+
+    <div
+      *ngIf="description.invalid && (description.dirty || description.touched)"
+      class="text-red-800 p-2 bg-red-300 rounded mb-2"
+    >
+      Description is required field
+    </div>
+
+    <div class="mb-5">
+      <label for="category" class="block">Category</label>
+      <select
+        class="p-2 rounded-sm border w-full"
+        name="category"
+        id="category"
+        [(ngModel)]="form.category"
+        #category="ngModel"
+        (change)="selected()"
+      >
+        <option value="" disabled selected>Select category</option>
+        <option
+          class="p-2 rounded-sm border w-full"
+          *ngFor="let item of categoryData"
+          [ngValue]="item"
+        >
+          {{ item }}
+        </option>
+      </select>
+      <!-- <input
+          class="p-2 rounded-sm border w-full"
+          type="text"
+          name="category"
+          id="category"
+          [(ngModel)]="form.category"
+          #category="ngModel"
+          required
+        /> -->
+    </div>
+    <div
+      *ngIf="category.invalid && (category.dirty || category.touched)"
+      class="text-red-800 p-2 bg-red-300 rounded mb-2"
+    >
+      Category is required field
+    </div>
+
+    <div class="mb-5">
+      <label for="author" class="block">author</label>
+      <input
+        class="p-2 rounded-sm border w-full"
+        type="text"
+        name="author"
+        id="author"
+        [(ngModel)]="form.author"
+        #author="ngModel"
+        required
+        readonly
+      />
+    </div>
+    <div
+      *ngIf="author.invalid && (author.dirty || author.touched)"
+      class="text-red-800 p-2 bg-red-300 rounded mb-2"
+    >
+      Author is required field
+    </div>
+
+    <div>
+      <button
+        [disabled]="myForm.form.invalid"
+        class="p-2 rounded w-full bg-blue-500 cursor-pointer text-white hover:bg-blue-800 hover:transition-all hover:duration-200"
+        type="submit"
+      >
+        <!-- isLoading() -->
+        <ng-container *ngIf="isLoading()">Finishing...</ng-container>
+        <ng-container *ngIf="!isLoading()">Submit</ng-container>
+      </button>
+    </div>
+  </form>
+</div>

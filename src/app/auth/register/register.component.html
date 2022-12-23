@@ -1,0 +1,77 @@
+<div class="flex justify-center items-center h-[80vh]">
+  <form
+    #myForm="ngForm"
+    (ngSubmit)="submit()"
+    class="p-5 border w-96 rounded-md"
+  >
+    <h1 class="text-center text-2xl mb-3">Register</h1>
+    <div class="mb-3">
+      <label for="username" class="block">Username</label>
+      <input
+        class="p-2 rounded-sm border w-full"
+        type="text"
+        name="username"
+        id="username"
+        [(ngModel)]="form.username"
+        #username="ngModel"
+        required
+      />
+    </div>
+    <div
+      *ngIf="username.invalid && (username.dirty || username.touched)"
+      class="text-red-800 p-2 bg-red-300 rounded mb-2"
+    >
+      Username is required field
+    </div>
+
+    <div class="mb-3">
+      <label for="email" class="block">Email</label>
+      <input
+        class="p-2 rounded-sm border w-full"
+        type="email"
+        name="email"
+        id="email"
+        [(ngModel)]="form.email"
+        #email="ngModel"
+        required
+      />
+    </div>
+
+    <div
+      *ngIf="email.invalid && (email.dirty || email.touched)"
+      class="text-red-800 p-2 bg-red-300 rounded mb-2"
+    >
+      Email field must be valid
+    </div>
+    <div class="mb-5">
+      <label for="password" class="block">Password</label>
+      <input
+        class="p-2 rounded-sm border w-full"
+        type="password"
+        name="password"
+        id="password"
+        [(ngModel)]="form.password"
+        #password="ngModel"
+        required
+      />
+    </div>
+    <div
+      *ngIf="password.invalid && (password.dirty || password.touched)"
+      class="text-red-800 p-2 bg-red-300 rounded mb-2"
+    >
+      Password field must be valid
+    </div>
+
+    <div>
+      <button
+        [disabled]="myForm.form.invalid"
+        class="p-2 rounded w-full bg-purple-800 cursor-pointer text-white hover:bg-purple-900 hover:transition-all hover:duration-200"
+        type="submit"
+      >
+        <!-- isLoading() -->
+        <ng-container *ngIf="">Registering in...</ng-container>
+        <ng-container>Register</ng-container>
+      </button>
+    </div>
+  </form>
+</div>

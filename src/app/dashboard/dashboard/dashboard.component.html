@@ -1,0 +1,87 @@
+<div class="bg-gray-50 min-h-screen">
+  <div class="container w-10/12 m-auto">
+    <div class="flex flex-col md:justify-between md:flex-row mb-6 py-4">
+      <header class="text-2xl md:text-5xl">
+        <strong>Welcome {{ username | titlecase }}</strong>
+      </header>
+      <a
+        class="py-2 w-fit text-sm px-3 border bg-blue-500 text-white rounded-lg md:rounded-md md:px-6 md:py-3 hover:bg-blue-800 hover:text-white hover:transition-all ease-in-out duration-300"
+        routerLink="/dashboard/addpost"
+      >
+        Create
+      </a>
+    </div>
+
+    <header
+      class="text-2xl mb-4 md:w-10/12 mx-auto md:text-4xl border-b-4 border-b-blue-500"
+    >
+      <strong>Your Posts</strong>
+    </header>
+
+    <div class="content overflow-auto">
+      <table class="w-full mx-auto my-3 md:w-10/12 bg-white">
+        <thead class="border-b border-b-gray-300 text-left bg-yellow-200">
+          <tr>
+            <th class="px-3 py-3 tracking-wide text-sm">Sno.</th>
+            <th class="px-3 py-3 tracking-wide text-sm">Title</th>
+            <th class="px-3 py-3 tracking-wide text-sm">Category</th>
+            <th class="px-3 py-3 tracking-wide text-sm">Edit</th>
+            <th class="px-3 py-3 tracking-wide text-sm">Delete</th>
+          </tr>
+        </thead>
+        <tbody class="text-left divide-y divide-gray-700">
+          <ng-container *ngFor="let post of posts[0]; let i = index">
+            <!-- <tr class="border-b">
+              <td class="px-3 py-2">{{ i + 1 }}</td>
+              <td class="px-3 py-2">{{ post.title }}</td>
+              <td class="px-3 py-2">{{ post.category }}</td>
+              <td class="px-3 py-2">
+                <button
+                  class="border border-black text-sm p-2 w-1/3 rounded-md transition ease-in-out hover:bg-black hover:text-white duration-300"
+                >
+                  Edit
+                </button>
+              </td>
+              <td class="px-3 py-2">
+                <button
+                  class="border border-black text-sm p-2 w-1/3 rounded-md transition ease-in-out hover:bg-black hover:text-white duration-300"
+                >
+                  Edit
+                </button>
+              </td>
+            </tr> -->
+
+            <tr class="border-b">
+              <td class="px-3 py-2 tracking-wide text-sm whitespace-nowrap">
+                {{ i + 1 }}.
+              </td>
+              <td class="px-3 py-2 tracking-wide text-sm whitespace-nowrap">
+                {{ post.title }}
+              </td>
+              <td class="px-3 py-2 tracking-wide text-sm whitespace-nowrap">
+                {{ post.category }}
+              </td>
+              <td class="px-3 py-2 tracking-wide text-sm whitespace-nowrap">
+                <button
+                  (click)="editPost(post)"
+                  [routerLink]="getParam(post._id)"
+                  class="border border-black text-sm p-2 w-fit rounded-md transition ease-in-out hover:bg-black hover:text-white duration-300"
+                >
+                  <i class="fa-solid fa-pen-to-square"></i>
+                </button>
+              </td>
+              <td class="px-3 py-2 tracking-wide text-sm whitespace-nowrap">
+                <button
+                  (click)="submit(post, post._id)"
+                  class="border border-red-600 text-red-600 text-sm p-2 w-fit rounded-md transition ease-in-out hover:bg-red-600 hover:text-white duration-300"
+                >
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
