@@ -3,4 +3,5 @@ export interface Post {
   description: string;
   category: string;
   author: string;
+  blogfile: File;
 }

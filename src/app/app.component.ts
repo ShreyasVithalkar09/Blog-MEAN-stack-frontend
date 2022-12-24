@@ -24,7 +24,6 @@ export class AppComponent {
         localStorage.removeItem('token');
         this.authService.isLoggedIn = false;
         this.authService.getUser().username = '';
-        console.log(this.res.success);
         this.router.navigate(['/']);
       }
     });

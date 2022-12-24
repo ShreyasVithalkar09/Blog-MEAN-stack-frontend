@@ -25,6 +25,7 @@ export class DashboardComponent implements OnInit {
   }
 
   posts: any[] = [];
+  postsLength: number = 0;
 
   username: string = '';
   response: any = {};
@@ -40,7 +41,7 @@ export class DashboardComponent implements OnInit {
     if (this.username !== '') {
       this.dashboardService.getUserPosts(this.username).subscribe((data) => {
         this.posts = [...this.posts, data];
-        console.log(this.posts);
+        this.postsLength = this.posts[0].length;
       });
     }
   }
@@ -52,7 +53,6 @@ export class DashboardComponent implements OnInit {
 
   submit(post: Post, id: string) {
     this.blogService.deletePost(id).subscribe((data) => {
-      console.log(data);
       this.response = data;
       if (this.response.success) {
         alert('Post Successfully deleted');

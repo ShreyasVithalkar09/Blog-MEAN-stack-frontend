@@ -15,16 +15,20 @@ export class BlogDetailComponent implements OnInit {
   ) {}
   blog: Blog = {} as Blog;
   id: string = '';
+  imageUrl: string = '';
+  content: string = '';
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id')!;
-    console.log(this.id);
     this.getSingleBlog();
   }
 
   getSingleBlog() {
     this.blogService.getSingleBlog(this.id).subscribe((data) => {
       this.blog = data as Blog;
-      console.log(this.blog);
+      const content = this.blog.description.replace('/\n/g', '<br/>');
+      this.content = content;
+      const imgUrl = this.blog.blogImage.secure_url!;
+      this.imageUrl = imgUrl;
     });
   }
 }

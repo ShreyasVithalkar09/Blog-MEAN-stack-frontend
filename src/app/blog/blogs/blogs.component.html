@@ -1,5 +1,5 @@
 <div
-  class="hero h-[50vh] mb-8 border bg-[#F8F988] flex justify-center items-center flex-col"
+  class="hero h-[50vh] mb-8 bg-[#F8F988] flex justify-center items-center flex-col"
 >
   <h1 class="text-3xl md:text-6xl text-center mb-4">
     <strong>Explore the best Tech updates</strong>
@@ -22,9 +22,13 @@
 </div>
 
 <div
-  class="container border w-10/12 m-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6"
+  class="container w-10/12 mb-8 m-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6"
 >
   <ng-container *ngFor="let singleBlog of allBlogs[0]; let i = index">
     <app-blog [blog]="singleBlog" [blogIndex]="i"></app-blog>
   </ng-container>
+</div>
+
+<div class="footer p-4 bg-gray-900 text-white text-center">
+  <p>Made with ❤️ by Shreyas Vithalkar</p>
 </div>

@@ -9,13 +9,6 @@ export class DashboardService {
 
   BASE_URL = 'http://localhost:4000/posts';
 
-  // httpOptions = {
-  //   headers: new HttpHeaders().set(
-  //     'Authorization',
-  //     'Bearer ' + localStorage.getItem('token')
-  //   ),
-  // };
-
   getUserPosts(username: string) {
     return this.http.get(this.BASE_URL + `/userposts?author=${username}`);
   }

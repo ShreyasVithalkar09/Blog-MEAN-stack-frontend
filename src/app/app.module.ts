@@ -13,8 +13,9 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
 import { AddpostComponent } from './dashboard/addpost/addpost.component';
 import { EditpostComponent } from './dashboard/editpost/editpost.component';
-import { ModalComponent } from './dashboard/modal/modal.component';
 import { TokeninterceptorService } from './auth/tokeninterceptor.service';
+import { TruncatePipe } from './pipes/truncate.pipe';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 @NgModule({
   declarations: [
@@ -27,9 +28,15 @@ import { TokeninterceptorService } from './auth/tokeninterceptor.service';
     DashboardComponent,
     AddpostComponent,
     EditpostComponent,
-    ModalComponent,
+    TruncatePipe,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    CKEditorModule,
+  ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

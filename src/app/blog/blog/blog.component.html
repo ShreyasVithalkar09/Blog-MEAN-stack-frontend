@@ -1,12 +1,12 @@
 <div
   class="card bg-white border max-w-xs lg:max-w-sm pb-4 text-left rounded-md"
 >
-  <div class="mb-2 object-cover rounded-t-md">
+  <div class="mb-2 object-cover rounded-t-md w-full h-[200px]">
     <img
-      src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
+      [src]="blog.blogImage.secure_url"
       alt=""
       width=""
-      class="rounded-t-md"
+      class="rounded-t-md h-full w-full object-contain"
     />
   </div>
   <div class="p-3">
@@ -14,11 +14,14 @@
       <p>
         <strong>{{ blog.title | titlecase }}</strong>
       </p>
-      <p class="p-2 bg-yellow-200 text-xs rounded-md">
+      <p class="p-2 bg-yellow-200 text-xs rounded-md bg-opacity-70">
         {{ blog.category | uppercase }}
       </p>
     </div>
-    <p>{{ blog.description }}</p>
+    <p
+      class="text-gray-600 my-2"
+      [innerHTML]="blog.description | limitTo : '50'"
+    ></p>
     <p class="mb-4 text-sm">
       posted by: {{ blog.author }} on {{ blog.datetime }}
     </p>

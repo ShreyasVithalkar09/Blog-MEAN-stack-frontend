@@ -27,15 +27,6 @@ export class EditpostComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id')!;
-    console.log('This is post id ----- ' + this.id);
-    // this.route.data.subscribe((res) => {
-    //   this.postId = res;
-    //   console.log(this.postId.id);
-    //   localStorage.removeItem('id');
-    //   // if (this.postId.id) {
-    //   //   this.getSingleBlog();
-    //   // }
-    // });
   }
 
   form: Post = {
@@ -43,12 +34,17 @@ export class EditpostComponent implements OnInit {
     description: this.blogService.post.description,
     category: this.blogService.post.category,
     author: this.authService.getUser().username,
+    blogfile: this.blogService.post.blogfile,
   };
 
   submit() {
-    console.log(this.form, this.id);
-    this.blogService.editPost(this.id, this.form).subscribe((data) => {
-      console.log(data);
+    const formData = new FormData();
+    formData.append('title', this.form.title);
+    formData.append('description', this.form.description);
+    formData.append('category', this.form.category);
+    formData.append('author', this.authService.getUser().username);
+
+    this.blogService.editPost(this.id, formData).subscribe((data) => {
       this.response = data;
       if (this.response.success) {
         this.router.navigate(['dashboard']);
@@ -61,25 +57,4 @@ export class EditpostComponent implements OnInit {
   isLoading() {
     return this.authService.isLoading;
   }
-
-  // async setForm() {
-  //   await this.blogService.getSingleBlog(this.postId.id).subscribe((data) => {
-  //     this.blog = data as Blog;
-  //     // console.log(this.blog);
-  //   });
-  //   if (
-  //     (this.form.title &&
-  //       this.form.description &&
-  //       this.form.category &&
-  //       this.form.author) == ''
-  //   ) {
-  //     this.form = {
-  //       title: this.blog.title!,
-  //       description: this.blog.description!,
-  //       category: this.blog.category!,
-  //       author: this.authService.getUser().username,
-  //       // author: this.authService.getUser().username,
-  //     };
-  //   }
-  // }
 }

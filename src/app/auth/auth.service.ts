@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { LoginForm, RegisterForm } from '../types/Auth';
 import { User } from '../types/User';
 import { Router } from '@angular/router';
+import { skip } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +21,9 @@ export class AuthService {
 
   register(formData: RegisterForm) {
     this.isLoading = true;
-    return this.http.post(this.BASE_URL + '/register', formData);
+    return this.http.post(this.BASE_URL + '/register', formData, {
+      headers: { skip: 'true' },
+    });
   }
 
   login(formData: LoginForm) {
@@ -51,7 +54,6 @@ export class AuthService {
 
   getToken() {
     if (this.token !== '') {
-      console.log(this.token);
       return this.token;
     }
     return null;

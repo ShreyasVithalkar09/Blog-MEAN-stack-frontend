@@ -2,6 +2,7 @@
   <form
     #myForm="ngForm"
     (ngSubmit)="submit()"
+    enctype="multipart/form-data"
     class="p-5 border w-10/12 rounded-md"
   >
     <h1 class="text-center text-2xl mb-3">Create Post</h1>
@@ -26,7 +27,7 @@
 
     <div class="mb-3">
       <label for="description" class="block">Description</label>
-      <textarea
+      <!-- <textarea
         class="p-2 rounded-sm border w-full"
         type="text"
         name="description"
@@ -35,7 +36,17 @@
         #description="ngModel"
         required
       >
-      </textarea>
+      </textarea> -->
+
+      <ckeditor
+        [editor]="Editor"
+        [config]="{ toolbar: ['heading', '|', 'bold', 'italic'] }"
+        name="description"
+        id="description"
+        [(ngModel)]="form.description"
+        #description="ngModel"
+        required
+      ></ckeditor>
     </div>
 
     <div
@@ -82,7 +93,7 @@
     </div>
 
     <div class="mb-5">
-      <label for="author" class="block">author</label>
+      <label for="author" class="block">Author</label>
       <input
         class="p-2 rounded-sm border w-full"
         type="text"
@@ -101,6 +112,25 @@
       Author is required field
     </div>
 
+    <div class="mb-5">
+      <label for="blogfile" class="block">Image Upload</label>
+      <input
+        class="p-2 rounded-sm border w-full"
+        type="file"
+        name="blogfile"
+        id="blogfile"
+        [(ngModel)]="form.blogfile"
+        #blogfile="ngModel"
+        (change)="onChange($event)"
+        required
+      />
+    </div>
+    <div
+      *ngIf="blogfile.invalid && (blogfile.dirty || blogfile.touched)"
+      class="text-red-800 p-2 bg-red-300 rounded mb-2"
+    >
+      Image is required field
+    </div>
     <div>
       <button
         [disabled]="myForm.form.invalid"
